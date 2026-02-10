@@ -23,9 +23,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-12 font-bold text-[18px] tracking-[-0.36px] text-[#48464c]">
-          <Link href="#" className="hover:text-[#1c559d] transition-colors">About us</Link>
-          <Link href="#" className="hover:text-[#1c559d] transition-colors">Products</Link>
-          <Link href="#" className="hover:text-[#1c559d] transition-colors">Strategic Partners</Link>
+          <Link href="/#about" className="hover:text-[#1c559d] transition-colors">About us</Link>
+          <Link href="/core-solutions" className="hover:text-[#1c559d] transition-colors">Products</Link>
+          <Link href="/#partners" className="hover:text-[#1c559d] transition-colors">Strategic Partners</Link>
         </nav>
 
         {/* Desktop Contact Button */}
@@ -55,9 +55,9 @@ export default function Header() {
       {isMenuOpen && (
         <div className="lg:hidden absolute top-20 left-0 right-0 bg-white border-b border-[#e0e0e0] p-6 shadow-xl flex flex-col gap-6 z-50 animate-in slide-in-from-top-5">
           <nav className="flex flex-col gap-6 font-bold text-[18px] text-center text-[#48464c]">
-            <Link href="#" className="hover:text-[#1c559d]" onClick={() => setIsMenuOpen(false)}>About us</Link>
-            <Link href="#" className="hover:text-[#1c559d]" onClick={() => setIsMenuOpen(false)}>Products</Link>
-            <Link href="#" className="hover:text-[#1c559d]" onClick={() => setIsMenuOpen(false)}>Strategic Partners</Link>
+            <Link href="/#about" className="hover:text-[#1c559d]" onClick={() => setIsMenuOpen(false)}>About us</Link>
+            <Link href="/core-solutions" className="hover:text-[#1c559d]" onClick={() => setIsMenuOpen(false)}>Products</Link>
+            <Link href="/#partners" className="hover:text-[#1c559d]" onClick={() => setIsMenuOpen(false)}>Strategic Partners</Link>
           </nav>
           <Link
             href="/contact"

@@ -30,7 +30,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section className="bg-white py-16 md:py-24 px-6 md:px-[70px] text-[#1D1A22]">
+    <section id="about" className="bg-white py-16 md:py-24 px-6 md:px-[70px] text-[#1D1A22]">
       <div className="mx-auto space-y-16 md:space-y-24">
         {/* Introduction */}
         <div className="space-y-6 md:space-y-8 w-full text-justify">

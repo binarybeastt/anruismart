@@ -9,10 +9,10 @@ export default function Footer() {
         <div className="space-y-4 md:space-y-6 flex flex-col items-center md:items-start w-full">
           <h3 className="text-xl md:text-2xl font-bold font-display capitalize">Quick Links</h3>
           <nav className="flex flex-col gap-3 md:gap-4 text-base md:text-lg lg:text-xl">
-            <Link href="#" className="hover:text-[#99ea5c] transition-colors">Products</Link>
-            <Link href="#" className="hover:text-[#99ea5c] transition-colors">Partners</Link>
-            <Link href="#" className="hover:text-[#99ea5c] transition-colors">About us</Link>
-            <Link href="#" className="hover:text-[#99ea5c] transition-colors">Contact</Link>
+            <Link href="/core-solutions" className="hover:text-[#99ea5c] transition-colors">Products</Link>
+            <Link href="/#partners" className="hover:text-[#99ea5c] transition-colors">Partners</Link>
+            <Link href="/#about" className="hover:text-[#99ea5c] transition-colors">About us</Link>
+            <Link href="/contact" className="hover:text-[#99ea5c] transition-colors">Contact</Link>
           </nav>
         </div>
 

@@ -1,5 +1,8 @@
 import CoreSolutionsHero from "@/components/CoreSolutionsHero";
 import CoreSolutionsList from "@/components/CoreSolutionsList";
+import TrainingSupport from "@/components/TrainingSupport";
+import WhoWeServeAndWhy from "@/components/WhoWeServeAndWhy";
+import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -13,6 +16,9 @@ export default function CoreSolutionsPage() {
     <main className="min-h-screen bg-white">
       <CoreSolutionsHero />
       <CoreSolutionsList />
+      <TrainingSupport />
+      <WhoWeServeAndWhy />
+      <CallToAction />
       <Footer />
     </main>
   );

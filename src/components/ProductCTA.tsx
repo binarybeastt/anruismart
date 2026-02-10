@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import Link from "next/link";
+
 export default function ProductCTA() {
   return (
     <section className="relative w-full py-20 md:py-32 overflow-hidden bg-[#1c559d]">
@@ -20,9 +22,12 @@ export default function ProductCTA() {
           Find Modern Smart Technology For The Best Education & Multimedia Experiences
         </h2>
         
-        <button className="bg-[#8ed955] text-white text-base md:text-lg font-bold py-4 px-10 rounded-xl border-b-4 border-[#265900] active:border-b-0 active:translate-y-1 transition-all hover:brightness-105 hover:shadow-lg w-full sm:w-auto">
+        <Link 
+          href="/core-solutions"
+          className="bg-[#8ed955] text-white text-base md:text-lg font-bold py-4 px-10 rounded-xl border-b-4 border-[#265900] active:border-b-0 active:translate-y-1 transition-all hover:brightness-105 hover:shadow-lg w-full sm:w-auto inline-block"
+        >
           Explore Products
-        </button>
+        </Link>
       </div>
     </section>
   );

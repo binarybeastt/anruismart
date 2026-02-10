@@ -1,6 +1,6 @@
 export default function StrategicAdvantages() {
   return (
-    <section className="bg-[#8ed955] py-16 md:py-24 px-6 md:px-[70px] relative overflow-hidden">
+    <section id="partners" className="bg-[#8ed955] py-16 md:py-24 px-6 md:px-[70px] relative overflow-hidden">
       {/* CSS Pattern Background */}
       <div 
         className="absolute inset-0 opacity-10 pointer-events-none"

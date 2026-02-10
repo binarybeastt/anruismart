@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CallToAction() {
   return (
     <section className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-b from-[#2f95ec] to-[#1c559d]">
@@ -21,12 +23,18 @@ export default function CallToAction() {
         </div>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
-          <button className="bg-[#8ed955] text-white text-lg font-bold py-4 px-10 rounded-xl border-b-4 border-[#265900] active:border-b-0 active:translate-y-1 transition-all hover:brightness-105 hover:shadow-lg w-full sm:w-auto">
+          <Link 
+            href="/contact"
+            className="bg-[#8ed955] text-white text-lg font-bold py-4 px-10 rounded-xl border-b-4 border-[#265900] active:border-b-0 active:translate-y-1 transition-all hover:brightness-105 hover:shadow-lg w-full sm:w-auto inline-block"
+          >
             Contact Us
-          </button>
-          <button className="bg-white text-[#265900] text-lg font-bold py-4 px-10 rounded-xl border-b-4 border-[#265900] active:border-b-0 active:translate-y-1 transition-all hover:bg-gray-50 hover:shadow-lg w-full sm:w-auto">
+          </Link>
+          <Link 
+            href="/core-solutions"
+            className="bg-white text-[#265900] text-lg font-bold py-4 px-10 rounded-xl border-b-4 border-[#265900] active:border-b-0 active:translate-y-1 transition-all hover:bg-gray-50 hover:shadow-lg w-full sm:w-auto inline-block"
+          >
             Explore Products
-          </button>
+          </Link>
         </div>
       </div>
     </section>

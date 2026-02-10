@@ -37,7 +37,7 @@ export default function HeroSection() {
               Contact Us
             </Link>
             <Link
-              href="#"
+              href="/core-solutions"
               className="w-full sm:w-auto bg-white text-[#1c559d] text-[16px] md:text-[18px] font-bold py-4 md:py-[17px] px-8 md:px-[32px] rounded-[12px] border border-[#1c559d] border-b-4 active:border-b active:translate-y-1 transition-all text-center hover:bg-gray-50"
             >
               Explore Products
