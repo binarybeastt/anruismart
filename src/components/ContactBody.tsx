@@ -120,7 +120,8 @@ export default function ContactBody() {
             </div>
 
             <p className="text-[18px] lg:text-[21px] font-normal leading-[1.5] lg:leading-[32px] tracking-[-0.42px] text-[#1D1A22] text-justify font-sans">
-              Have a renewable energy project, partnership idea, technical enquiries or feed back. Our team is ready to collaborate on solar installations, EV infrastructure, or custom solutions that drive sustainable impact
+              Looking to transform classrooms, deploy campus-wide technology, or explore a strategic partnership?
+Our experts are available to provide consultations, technical guidance, and tailored solutions for your institution or organisation
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

@@ -121,7 +121,8 @@ export default function ContactForm() {
             </div>
             
             <p className="text-[16px] md:text-[18px] leading-relaxed text-[#1d1a22] font-sans">
-              Have a renewable energy project, partnership idea, technical enquiries or feed back. Our team is ready to collaborate on solar installations, EV infrastructure, or custom solutions that drive sustainable impact
+              Looking to transform classrooms, deploy campus-wide technology, or explore a strategic partnership?
+Our experts are available to provide consultations, technical guidance, and tailored solutions for your institution or organisation
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

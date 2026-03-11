@@ -99,6 +99,58 @@ const productTabs = [
   },
 ];
 
+function ChevronIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <div className={`shrink-0 w-8 h-8 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="16" fill="#2F95EC"/>
+        <path d="M15.4012 21.1407C15.4679 21.2376 15.5572 21.3168 15.6613 21.3716C15.7655 21.4263 15.8814 21.4549 15.999 21.4549C16.1167 21.4549 16.2326 21.4263 16.3367 21.3716C16.4408 21.3168 16.5301 21.2376 16.5968 21.1407L23.1423 11.6862C23.2181 11.5771 23.2625 11.4494 23.2707 11.3169C23.279 11.1843 23.2508 11.0521 23.1892 10.9345C23.1276 10.8168 23.0349 10.7183 22.9212 10.6497C22.8076 10.5811 22.6773 10.5449 22.5445 10.5451H9.45356C9.32108 10.5456 9.19126 10.5823 9.07805 10.6511C8.96485 10.7199 8.87254 10.8183 8.81106 10.9356C8.74959 11.053 8.72126 11.1849 8.72913 11.3171C8.737 11.4493 8.78078 11.5769 8.85574 11.6862L15.4012 21.1407Z" fill="white"/>
+      </svg>
+    </div>
+  );
+}
+
+function AccordionSection({
+  title,
+  isOpen,
+  onToggle,
+  children,
+}: {
+  title: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={`border-b-4 border-[#e0e0e0] rounded-[32px] pt-8 ${isOpen ? "pb-16" : "pb-12"}`}>
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between gap-8 cursor-pointer"
+      >
+        <h2 className="font-display font-bold text-[28px] md:text-[32px] text-[#1c559d] tracking-[-0.64px] leading-[36px] text-left">
+          {title}
+        </h2>
+        <ChevronIcon isOpen={isOpen} />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="flex flex-col gap-16 pt-8">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function CheckmarkIcon() {
   return (
     <div className="shrink-0">
@@ -112,35 +164,28 @@ function CheckmarkIcon() {
 }
 
 export default function CoreSolutionsList() {
+  const [openSections, setOpenSections] = useState<Record<number, boolean>>({
+    1: true,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  });
+
+  const toggle = (section: number) =>
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
+
   return (
     <section className="bg-[#f3f3f3] py-[108px] px-6 md:px-[66px]">
       <div className="max-w-[1440px] mx-auto">
         <div className="flex flex-col gap-16">
 
           {/* ===== Section 1: Smart Interactive Displays & Classrooms ===== */}
-          <motion.div
-            className="border-b-2 border-[#c6c6c6] pb-16 pt-8 flex flex-col gap-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            variants={fadeInUp}
+          <AccordionSection
+            title="1. Smart Interactive Displays & Classrooms"
+            isOpen={openSections[1]}
+            onToggle={() => toggle(1)}
           >
-            {/* Header + Intro */}
-            <div className="flex flex-col gap-8">
-              {/* Title Row */}
-              <div className="flex items-center justify-between gap-8">
-                <h2 className="font-display font-bold text-[28px] md:text-[32px] text-[#1c559d] tracking-[-0.64px] leading-[36px]">
-                  1. Smart Interactive Displays & Classrooms
-                </h2>
-                <div className="shrink-0 w-8 h-8 relative rotate-180">
-                  <Image
-                    src="/images/arrow-up-2-fill.svg"
-                    alt=""
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
 
               {/* Image + Description */}
               <div className="flex flex-col lg:flex-row gap-8 items-center">
@@ -148,7 +193,7 @@ export default function CoreSolutionsList() {
                 <div className="bg-[#bfe2ff] p-3 rounded-[35px] shrink-0 w-full lg:w-[740px]">
                   <div className="relative h-[300px] lg:h-[510px] w-full rounded-[24px] overflow-hidden">
                     <Image
-                      src="/images/Solar Panel (PV) 1.png"
+                      src="/images/smart_display.png"
                       alt="Smart Interactive Displays & Classrooms"
                       fill
                       className="object-cover"
@@ -168,7 +213,6 @@ export default function CoreSolutionsList() {
                   </p>
                 </div>
               </div>
-            </div>
 
             {/* Sub-products */}
             <div className="flex flex-col gap-12">
@@ -319,31 +363,14 @@ export default function CoreSolutionsList() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </AccordionSection>
 
           {/* ===== Section 2: Recording & Broadcasting Systems ===== */}
-          <motion.div
-            className="border-b-2 border-[#e0e0e0] pb-16 pt-8 flex flex-col gap-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            variants={fadeInUp}
+          <AccordionSection
+            title="2. Recording & Broadcasting Systems"
+            isOpen={openSections[2]}
+            onToggle={() => toggle(2)}
           >
-            {/* Title Row */}
-            <div className="flex items-center justify-between gap-8">
-              <h2 className="font-display font-bold text-[28px] md:text-[32px] text-[#1c559d] tracking-[-0.64px] leading-[36px]">
-                2. Recording & Broadcasting Systems
-              </h2>
-              <div className="shrink-0 w-8 h-8 relative rotate-180">
-                <Image
-                  src="/images/arrow-up-2-fill.svg"
-                  alt=""
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
-
             {/* Description + Image */}
             <div className="flex flex-col gap-8 items-center">
               <p className="text-[#1d1a22] font-sans text-[18px] leading-[27px] tracking-[-0.36px] text-justify max-w-[1148px]">
@@ -436,33 +463,16 @@ export default function CoreSolutionsList() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </AccordionSection>
 
           {/* ===== Section 3: OEM & Custom Technology Services ===== */}
-          <motion.div
-            className="border-b-2 border-[#c6c6c6] pb-16 pt-8 flex flex-col gap-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            variants={fadeInUp}
+          <AccordionSection
+            title="3. OEM & Custom Technology Services"
+            isOpen={openSections[3]}
+            onToggle={() => toggle(3)}
           >
             {/* Header + Intro */}
             <div className="flex flex-col gap-8">
-              {/* Title Row */}
-              <div className="flex items-center justify-between gap-8">
-                <h2 className="font-display font-bold text-[28px] md:text-[32px] text-[#1c559d] tracking-[-0.64px] leading-[36px]">
-                  3. OEM & Custom Technology Services
-                </h2>
-                <div className="shrink-0 w-8 h-8 relative rotate-180">
-                  <Image
-                    src="/images/arrow-up-2-fill.svg"
-                    alt=""
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-
               {/* Image + Description */}
               <div className="flex flex-col lg:flex-row gap-8 items-center">
                 {/* Image Card */}
@@ -666,35 +676,17 @@ export default function CoreSolutionsList() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </AccordionSection>
 
           {/* ===== Section 4: Smart Campus Digital Infrastructure ===== */}
-          <motion.div
-            className="border-b-2 border-[#e0e0e0] pb-16 pt-8 flex flex-col gap-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            variants={fadeInUp}
+          <AccordionSection
+            title="4. Smart Campus Digital Infrastructure"
+            isOpen={openSections[4]}
+            onToggle={() => toggle(4)}
           >
-            {/* Title + Description */}
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between gap-8">
-                <h2 className="font-display font-bold text-[28px] md:text-[32px] text-[#1c559d] tracking-[-0.64px] leading-[36px]">
-                  4. Smart Campus Digital Infrastructure
-                </h2>
-                <div className="shrink-0 w-8 h-8 relative rotate-180">
-                  <Image
-                    src="/images/arrow-up-2-fill.svg"
-                    alt=""
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-              <p className="text-[#1d1a22] font-sans text-[18px] leading-[27px] tracking-[-0.36px] max-w-[1068px]">
-                <span className="font-bold">A truly smart campus depends on reliable infrastructure</span>. We design and deploy digital backbones that connect classrooms, devices, and systems into a single, secure, and manageable environment.
-              </p>
-            </div>
+            <p className="text-[#1d1a22] font-sans text-[18px] leading-[27px] tracking-[-0.36px] max-w-[1068px]">
+              <span className="font-bold">A truly smart campus depends on reliable infrastructure</span>. We design and deploy digital backbones that connect classrooms, devices, and systems into a single, secure, and manageable environment.
+            </p>
 
             {/* Image + Solutions Card */}
             <div className="flex flex-col lg:flex-row gap-6 items-center">
@@ -771,10 +763,16 @@ export default function CoreSolutionsList() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </AccordionSection>
 
           {/* ===== Section 5: Smart Digital Products and Accessories ===== */}
-          <ProductsCarouselSection />
+          <AccordionSection
+            title="5. Smart Digital Products and Accessories"
+            isOpen={openSections[5]}
+            onToggle={() => toggle(5)}
+          >
+            <ProductsCarouselContent />
+          </AccordionSection>
 
         </div>
       </div>
@@ -782,8 +780,8 @@ export default function CoreSolutionsList() {
   );
 }
 
-/* ---------- Section 5 extracted as its own component for state ---------- */
-function ProductsCarouselSection() {
+/* ---------- Section 5 carousel content ---------- */
+function ProductsCarouselContent() {
   const [activeTab, setActiveTab] = useState(0);
 
   const prev = () => setActiveTab((i) => (i === 0 ? productTabs.length - 1 : i - 1));
@@ -792,27 +790,11 @@ function ProductsCarouselSection() {
   const current = productTabs[activeTab];
 
   return (
-    <motion.div
-      className="pt-8 flex flex-col gap-8"
-      initial="hidden"
-      whileInView="visible"
-      viewport={defaultViewport}
-      variants={fadeInUp}
-    >
-      {/* Title + Description */}
-      <div className="flex gap-7 items-center">
-        <div className="flex-1 flex flex-col gap-7">
-          <h2 className="font-display font-bold text-[28px] md:text-[32px] text-[#1c559d] tracking-[-0.64px] leading-[36px]">
-            5. Smart Digital Products and Accessories
-          </h2>
-          <p className="text-[#1d1a22] font-sans text-[18px] leading-[27px] tracking-[-0.36px] max-w-[845px]">
-            As a professional manufacturer, we empower global brands and businesses with reliable smart technological products, for offices, government, schools, bulk supply and tender projects.
-          </p>
-        </div>
-        <div className="shrink-0 w-8 h-8 relative rotate-180">
-          <Image src="/images/arrow-up-2-fill.svg" alt="" fill className="object-contain" />
-        </div>
-      </div>
+    <div className="flex flex-col gap-8">
+      {/* Description */}
+      <p className="text-[#1d1a22] font-sans text-[18px] leading-[27px] tracking-[-0.36px] max-w-[845px]">
+        As a professional manufacturer, we empower global brands and businesses with reliable smart technological products, for offices, government, schools, bulk supply and tender projects.
+      </p>
 
       {/* Tab Bar */}
       <div className="flex justify-center">
@@ -880,24 +862,24 @@ function ProductsCarouselSection() {
 
               {/* Subcategory Cards */}
               <div className={`grid grid-cols-1 gap-2 ${current.subcategories.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
-                {current.subcategories.map((sub) => (
+                {current.subcategories.map((sub: Record<string, unknown>) => (
                   <div
-                    key={sub.title}
+                    key={sub.title as string}
                     className="bg-[#fafafa] border border-[#e0e0e0] border-b-2 rounded-[8px] p-4 flex flex-col gap-2"
                   >
                     <h4 className="font-display font-medium text-[18px] md:text-[21px] text-[#68b0ef] leading-[24px] whitespace-nowrap">
-                      {sub.title}
+                      {sub.title as string}
                     </h4>
                     {sub.bestFor ? (
                       <div className="font-sans text-[12px] text-[#002d1b] leading-[18px] flex flex-col gap-1">
-                        <div><span className="font-bold">Best For:</span> {sub.bestFor}</div>
+                        <div><span className="font-bold">Best For:</span> {sub.bestFor as string}</div>
                         {sub.keySpecs && (
-                          <div><span className="font-bold">Key Specs:</span> {sub.keySpecs.join(", ")}</div>
+                          <div><span className="font-bold">Key Specs:</span> {(sub.keySpecs as string[]).join(", ")}</div>
                         )}
                       </div>
                     ) : (
                       <p className="font-sans text-[12px] text-[#002d1b] leading-[18px]">
-                        {sub.description}
+                        {sub.description as string}
                       </p>
                     )}
                   </div>
@@ -918,6 +900,6 @@ function ProductsCarouselSection() {
           </svg>
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 }
